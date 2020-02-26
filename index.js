@@ -79,6 +79,18 @@ this.odometer = 0;
 Car.prototype.fill = function(gallons){
   this.tank = this.tank + gallons;
 }
+Car.prototype.drive = function (distance){
+const drivableMiles = this.tank * this.milesPerGallon;
+if (distance <= drivableMiles){
+  this.odometer = this.odometer + distance;
+  this.tank = this.tank - (distance/this.milesPerGallon)
+}
+else {
+  this.odometer = this.odometer + drivableMiles;
+  this.tank = 0;
+  return `I ran out of fuel at ${this.odometer} miles!`
+}
+}
 
 /*
   TASK 3
@@ -100,10 +112,13 @@ Baby.prototype.play = function(){
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. window/global binding: if nothing applies to "this" it will imply to the window unless we are in strict mode using the following code 'use strict'; 
+  2. implicit binding: which is the most common used binding and when the function is invoked by looking at the left side of the dot we can know what "this" is refering to
+  3. new binding: when we use a constructor function "this" is going to refer to a specific part of the object that is created and returned by the constructor function
+  4. explicit binding: with explicit binding we have more control on what "this" refers to by using three keywords: .call , .apply and .bind where each of these keywords work different than the other. 
+  call: will immediately invoke the function/ .call passes in arguments one by one 
+  apply: will immediate invoke the function / .apply we pass in arguments as an array 
+  bind: we pass in arguments one by one but it does not immediately invoke the function. It returns a brand new function that can be invoked later
 */
 
 
